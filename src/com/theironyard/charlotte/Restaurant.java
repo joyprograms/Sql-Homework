@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * Created by meekinsworks on 8/31/16.
  */
 public class Restaurant {
+
     public static void insertRestaurant() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 // I believe there is a way to not duplicate line 23, but don't know how and this works.
@@ -23,19 +24,20 @@ public class Restaurant {
 
     }
 
-    public static ArrayList<Restaurant> selectRestaurants(Connection conn) throws SQLException {
+    public static ArrayList<Restaurant> restaurants(Connection conn) throws SQLException {
 
-        ArrayList<Restaurant> restaurants = new ArrayList<>();
 
         PreparedStatement prstmt = conn.prepareStatement();
         ResultSet results = prstmt.executeQuery("SELECT * FROM restaurants");
 
 
         while (results.next()) {
+
             int id = results.getInt("id");
             String text = results.getString("text");
             int rating = results.getInt("rating");
             String price = results.getString("price");
+            ArrayList<Restaurant> restaurants = new ArrayList<>();
             restaurants.add(new Restaurant(id, text, rating, price));
             // getting error that the above are arguments and should be parameters.
             // don't know why.
@@ -47,6 +49,17 @@ public class Restaurant {
         ArrayList<Restaurant>(); //  I assume that this is the  the return statement that I need, but then, I have an
         // error about what is not passed in to the parameters here.
         // why am I getting errors about what is passed in? 5:25am
+
+
+    }
+
+    public static void restaurantsFromRoute () {
+        String restaurants;
+        String restaurantName;
+        int restaurantRating;
+        String restaurantPriceIn$;
+
+
 
 
     }
