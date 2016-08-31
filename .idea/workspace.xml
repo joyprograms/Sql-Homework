@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdec10c6-2e81-41aa-bd9a-9046eec1048c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/com/theironyard/charlotte/Main.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/theironyard/charlotte/Main.java" afterPath="$PROJECT_DIR$/src/com/theironyard/charlotte/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/theironyard/charlotte/Restaurant.java" afterPath="$PROJECT_DIR$/src/com/theironyard/charlotte/Restaurant.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/theironyard/charlotte/home.html" afterPath="$PROJECT_DIR$/src/com/theironyard/charlotte/home.html" />
-    </list>
+    <list default="true" id="cdec10c6-2e81-41aa-bd9a-9046eec1048c" name="Default" comment="" />
     <ignored path="Sql-Homework.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
