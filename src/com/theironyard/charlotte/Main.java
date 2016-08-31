@@ -51,11 +51,25 @@ public class Main {
     }
 
     public static ArrayList <Restaurant> selectRestaurants(Connection conn) throws  SQLException {
-        ArrayList<Restaurant> restaurants = new ArrayList<>();
 
-        PreparedStatement prstmt = conn.prepareStatement();
+    ArrayList<Restaurant> restaurants = new ArrayList<>();
 
-        ResultSet results = prstmt.executeQuery("SELECT * FROM restaurants");
+    PreparedStatement prstmt = conn.prepareStatement();
+    ResultSet results = prstmt.executeQuery("SELECT * FROM restaurants");
+
+        while (results.next()) {
+            int id = results.getInt("id");
+            String text = results.getString("text");
+            int rating = results.getInt("rating");
+            String price = results.getString("price");
+            System.out.printf("%s %s %s\n", id, text, rating, price);
+
+            // says missing return statement. if printf is a return , or returns something,
+            // what kind of return statement would I need? 5:23am
+        }
+        ArrayList<Restaurant>(); // I assume that this is the  the return statement that I need, but then, I have an
+        // error about what is not passed in to the parameters here.
+        // why am I getting errors about what is passed in?
 
 
     }
