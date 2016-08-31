@@ -8,11 +8,12 @@ import java.util.ArrayList;
  */
 public class Restaurant {
 
+
     public static void insertRestaurant() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 // I believe there is a way to not duplicate line 23, but don't know how and this works.
 
-        PreparedStatement prestmt = conn.prepareStatement(); //getting an error unless I pass something in here
+        PreparedStatement prestmt = conn.prepareStatement(""); //getting an error unless I pass something in here
 
         prestmt.execute("INSERT INTO restaurant (1, 'Burgers N Beans', 3, $)");
 
@@ -24,10 +25,11 @@ public class Restaurant {
 
     }
 
-    public static ArrayList<Restaurant> restaurants(Connection conn) throws SQLException {
+    public static void restaurants(Connection conn) throws SQLException {
+    ArrayList<Restaurant> restaurants = new ArrayList<>();
 
 
-        PreparedStatement prstmt = conn.prepareStatement();
+        PreparedStatement prstmt = conn.prepareStatement("");
         ResultSet results = prstmt.executeQuery("SELECT * FROM restaurants");
 
 
@@ -37,8 +39,7 @@ public class Restaurant {
             String text = results.getString("text");
             int rating = results.getInt("rating");
             String price = results.getString("price");
-            ArrayList<Restaurant> restaurants = new ArrayList<>();
-            restaurants.add(new Restaurant(id, text, rating, price));
+//            restaurants.add(new Restaurant(id, text, rating, price));
             // getting error that the above are arguments and should be parameters.
             // don't know why.
             System.out.printf("%s %s %s\n", id, text, rating, price);
@@ -46,7 +47,7 @@ public class Restaurant {
             // says missing return statement. if printf is a return , or returns something,
             // what kind of return statement would I need? 5:23am
         }
-        ArrayList<Restaurant>(); //  I assume that this is the  the return statement that I need, but then, I have an
+//        ArrayList<Restaurant>//(); //  I assume that this is the  the return statement that I need, but then, I have an
         // error about what is not passed in to the parameters here.
         // why am I getting errors about what is passed in? 5:25am
 
@@ -54,10 +55,11 @@ public class Restaurant {
     }
 
     public static void restaurantsFromRoute () {
-        String restaurants;
-        String restaurantName;
-        int restaurantRating;
-        String restaurantPriceIn$;
+        String restaurant;
+
+
+    }
+    public static void updateRestaurant () {
 
 
 

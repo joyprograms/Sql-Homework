@@ -1,15 +1,18 @@
 package com.theironyard.charlotte;
 
 import org.h2.tools.Server;
+import spark.ModelAndView;
 import spark.Session;
 import spark.Spark;
+import spark.template.mustache.MustacheTemplateEngine;
 
 import java.sql.*;
-
-import static com.theironyard.charlotte.Restaurant.restaurantsFromRoute;
+import java.util.HashMap;
 
 
 public class Main {
+//    ArrayList<Restaurant> restaurants = new ArrayList<>();
+    HashMap<String, Restaurant>  restaurants = new HashMap<>();
 
 
     public static void main(String[] args) throws SQLException {
@@ -29,7 +32,7 @@ public class Main {
     public static void deleteRestaurant() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
-        PreparedStatement prestmt = conn.prepareStatement(); //getting an error unless I pass something in here
+        PreparedStatement prestmt = conn.prepareStatement(""); //getting an error unless I pass something in here
 
         prestmt.execute("DELETE FROM restaurant WHERE id = '1'");
 
@@ -40,26 +43,61 @@ public class Main {
     public static void removeArrayList() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 
-        PreparedStatement prestmt = conn.prepareStatement(); //getting an error unless I pass something in here
+        PreparedStatement prestmt = conn.prepareStatement(""); //getting an error unless I pass something in here
 
         prestmt.execute("DELETE * FROM restaurants");
 
 
     }
-    public static void restaurantsFromRoute1() {
+    public void restaurantsFromRoute1() {
 
         Spark.init();
         Spark.get(
+                // job- get restaurants array list
                 "/",
                 ((request, response) -> {
                     Session session = request.session();
-                    String selectRestaurants = session.attribute("restaurants");
-                    Restaurant restaurant = restaurants.get(restaurant);
+
+                    String restaurant = session.attribute("restaurant");
+
                     // not sure I understand how array lists get called outside of their class.
 
+                    return new ModelAndView(restaurant, "home.html");
 
-                })
+                }),
+                new MustacheTemplateEngine()
         );
+
+        Spark.post(
+                "/edit-restaurant",
+                ((request, response) -> {
+                    String restaurantName = request.queryParams("restaurantName");
+                    String restaurantRating  = request.queryParams("restaurantRating");
+                    String restaurantPriceIn$ = request.queryParams("restaurantPriceIn$");
+
+                    Restaurant restaurant =
+                            restaurants.get(restaurantName);
+                            restaurants.get(restaurantRating);
+                            restaurants.get(restaurantPriceIn$);
+
+
+                    restaurants.put(restaurantName, restaurant);
+                    restaurants.put(restaurantRating, restaurant);
+                    restaurants.put(restaurantPriceIn$, restaurant);
+
+
+
+
+                    response.redirect("/");
+                    return "";
+
+
+        }
+        )
+
+        );
+
+
     }
 
 }
