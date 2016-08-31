@@ -7,21 +7,16 @@ import java.util.ArrayList;
  * Created by meekinsworks on 8/31/16.
  */
 public class Restaurant {
+    public static void insertRestaurant(String restaurantName, int restaurantRating, String restaurantPriceIn$) throws SQLException {
 
-
-    public static void insertRestaurant() throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:h2:./main");
 // I believe there is a way to not duplicate line 23, but don't know how and this works.
 
-        PreparedStatement prestmt = conn.prepareStatement(""); //getting an error unless I pass something in here
-
-        prestmt.execute("INSERT INTO restaurant (1, 'Burgers N Beans', 3, $)");
-
-        prestmt.execute("INSERT INTO restaurant VALUES (2, Hashtag Hashbrowns and Things, 4, $$)");
-
-        prestmt.execute("INSERT INTO restaurant VALUES (3, Brownies and Beanies, 2, $)");
-
-        prestmt.execute("INSERT INTO restaurant VALUES (4, CleanEatsX2, 5, $$)");
+        PreparedStatement prestmt = conn.prepareStatement("INSERT INTO restaurants VALUES (NULL, ?, ?, ?)"); //getting an error unless I pass something in here
+        prestmt.setString(1, restaurantName);
+        prestmt.setInt(2, restaurantRating);
+        prestmt.setString(3, restaurantPriceIn$);// index it shows up on the table and the value that is passed in from the parameter
+        prestmt.execute();
 
     }
 
@@ -59,6 +54,7 @@ public class Restaurant {
 
 
     }
+
     public static void updateRestaurant () {
 
 
